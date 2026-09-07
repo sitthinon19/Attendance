@@ -13,12 +13,12 @@ h1{font-size:22px;margin:0 0 8px;text-align:center}
 .user{text-align:center;color:#666;margin-bottom:16px;font-size:14px}
 label{display:block;font-weight:600;margin:12px 0 6px}
 input,select,textarea,button{font:inherit}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid #d9dee3;border-radius:10px;background:#fff}
+input,select,textarea{width:100%;max-width:100%;min-width:0;padding:11px 12px;border:1px solid #d9dee3;border-radius:10px;background:#fff}\ninput[type=date]{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding-left:10px;padding-right:10px}
 textarea{min-height:90px;resize:vertical}
 button{border:0;border-radius:11px;padding:12px 14px;cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
-.primary{width:100%;background:#111;color:#fff;font-weight:700}
-.secondary{background:#eef1f4}
+.primary{width:100%;background:#06c755;color:#fff;font-weight:700}
+.secondary{background:#06c755;color:#fff;font-weight:700}
 .danger{background:#c62828;color:#fff}
 .message{display:none;margin-top:14px;padding:12px;border-radius:10px;white-space:pre-line;text-align:center}
 .success{background:#e8f7ed;color:#137333}
@@ -57,8 +57,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
 </div>
 
 <div class="actions">
-  <button id="checkInBtn" class="primary">📍 CHECK IN</button>
-  <button id="checkOutBtn" class="secondary">🏁 CHECK OUT</button>
+  <button id="checkInBtn" class="primary">CHECK IN</button>
+  <button id="checkOutBtn" class="secondary">CHECK OUT</button>
 </div>
 
 <label for="photo">รูปถ่าย</label>
@@ -75,7 +75,7 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <script>
 
 const LIFF_ID = '2011333828-WZgotgUd';
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxGRUnNjIAyRosr_1gSh3kVia0Tk3gluNWXkOpVwqjKhJkDFWLrobc-MSVibATWnC--3A/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxkDGcj_hnbCNocRY3CuhiQpuxyNjna9395K3gGqheDfM3D18Lf6d7NA4I4JOcQLNAK2A/exec';
 let idToken = '';
 
 async function initLiff() {
@@ -163,7 +163,7 @@ async function doAttendance(mode){
     document.getElementById('photo').value='';
     loadHistory();
   }catch(e){showMessage('message',e.message||'เกิดข้อผิดพลาด',false);}
-  finally{btn.disabled=false;btn.textContent=mode==='CHECK_IN'?'📍 CHECK IN':'🏁 CHECK OUT';}
+  finally{btn.disabled=false;btn.textContent=mode==='CHECK_IN'?'CHECK IN':'CHECK OUT';}
 }
 async function loadHistory(){
   const box=document.getElementById('history'); box.innerHTML='<div class="loading">กำลังโหลด...</div>';
