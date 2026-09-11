@@ -4,1601 +4,400 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>เข้า-ออกงาน</title>
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  background:#f5f7f9;
-  font-family:Arial,"Noto Sans Thai",sans-serif;
-  color:#222;
-}
-
-.container{
-  max-width:560px;
-  margin:0 auto;
-  padding:16px;
-}
-
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-  box-shadow:0 3px 18px rgba(0,0,0,.07);
-}
-
-h1{
-  font-size:22px;
-  margin:0 0 8px;
-  text-align:center;
-}
-
-.user{
-  text-align:center;
-  color:#666;
-  margin-bottom:16px;
-  font-size:14px;
-}
-
-label{
-  display:block;
-  font-weight:600;
-  margin:12px 0 6px;
-}
-
-input,select,textarea,button{
-  font:inherit;
-}
-
-input,select,textarea{
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  padding:11px 12px;
-  border:1px solid #d9dee3;
-  border-radius:10px;
-  background:#fff;
-  box-sizing:border-box;
-}
-
-input[type="date"],
-input[type="time"]{
-  display:block;
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  box-sizing:border-box;
-  padding:11px 10px;
-}
-
-textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-button{
-  border:0;
-  border-radius:11px;
-  padding:12px 14px;
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-.primary{
-  width:100%;
-  background:#06c755;
-  color:#fff;
-  font-weight:700;
-}
-
-.secondary{
-  background:#06c755;
-  color:#fff;
-  font-weight:700;
-}
-
-.danger{
-  background:#c62828;
-  color:#fff;
-}
-
-.message{
-  display:none;
-  margin-top:14px;
-  padding:12px;
-  border-radius:10px;
-  white-space:pre-line;
-  text-align:center;
-}
-
-.success{
-  background:#e8f7ed;
-  color:#137333;
-}
-
-.error{
-  background:#fdecec;
-  color:#c62828;
-}
-
-.loading{
-  text-align:center;
-  padding:25px;
-  color:#666;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.section-title{
-  font-size:17px;
-  font-weight:700;
-  margin:18px 0 8px;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:16px;
-  width:100%;
-}
-
-.row > div{
-  min-width:0;
-}
-
-.item{
-  border:1px solid #e4e8ec;
-  border-radius:12px;
-  padding:12px;
-  margin-top:10px;
-  background:#fafbfc;
-}
-
-.item-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
-
-.remove{
-  background:#fdecec;
-  color:#c62828;
-  padding:6px 9px;
-  font-size:12px;
-}
-
-.history{
-  margin-top:14px;
-}
-
-.history-card{
-  border:1px solid #e4e8ec;
-  border-radius:11px;
-  padding:11px;
-  margin-top:8px;
-}
-
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:999px;
-  background:#eef1f4;
-  font-size:12px;
-}
-
-.small{
-  font-size:12px;
-  color:#777;
-}
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:12px;
-}
-
-/* ==============================
-   Request OT
-   ============================== */
-
-/* ช่องวันที่ */
-#otSection #otDate{
-  display:block;
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  box-sizing:border-box;
-}
-
-/* กลุ่มเวลาเริ่ม / เวลาสิ้นสุด */
-#otSection .row{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:16px;
-  width:100%;
-  max-width:100%;
-}
-
-/* แต่ละช่องของเวลา */
-#otSection .row > div{
-  min-width:0;
-  width:100%;
-}
-
-/* input เวลา */
-#otSection .row input[type="time"]{
-  display:block;
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  box-sizing:border-box;
-  padding-left:10px;
-  padding-right:10px;
-}
-
-/* ป้องกัน input ทุกชนิดใน Request OT ล้นกรอบ */
-#otSection input,
-#otSection textarea{
-  max-width:100%;
-  min-width:0;
-  box-sizing:border-box;
-}
-
-/* ปรับพื้นที่ภายใน Card ของ Request OT */
-#otSection .item{
-  overflow:hidden;
-}
-
-/* มือถือจอเล็ก */
-@media(max-width:380px){
-
-  .container{
-    padding:10px;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  .row{
-    gap:10px;
-  }
-
-  #otSection .row{
-    gap:10px;
-  }
-
-  #otSection .row input[type="time"]{
-    padding-left:8px;
-    padding-right:8px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f9;font-family:Arial,"Noto Sans Thai",sans-serif;color:#222}
+.container{max-width:560px;margin:0 auto;padding:16px}
+.card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 3px 18px rgba(0,0,0,.07)}
+h1{font-size:22px;margin:0 0 8px;text-align:center}
+.user{text-align:center;color:#666;margin-bottom:16px;font-size:14px}
+label{display:block;font-weight:600;margin:12px 0 6px}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;max-width:100%;min-width:0;padding:11px 12px;border:1px solid #d9dee3;border-radius:10px;background:#fff;box-sizing:border-box}
+input[type=date],input[type=time]{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:9px 8px}
+#otSection .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;width:100%;max-width:100%;margin-top:2px}
+#otSection .row>div{min-width:0;width:100%}
+#otSection .row input[type=time]{width:100%;max-width:100%;min-width:0}
+#otSection .item{overflow:hidden}
+#otSection input,#otSection textarea{max-width:100%;min-width:0;box-sizing:border-box}
+textarea{min-height:90px;resize:vertical}
+button{border:0;border-radius:11px;padding:12px 14px;cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{width:100%;background:#06c755;color:#fff;font-weight:700}
+.secondary{background:#06c755;color:#fff;font-weight:700}
+.danger{background:#c62828;color:#fff}
+.message{display:none;margin-top:14px;padding:12px;border-radius:10px;white-space:pre-line;text-align:center}
+.success{background:#e8f7ed;color:#137333}
+.error{background:#fdecec;color:#c62828}
+.loading{text-align:center;padding:25px;color:#666}
+.hidden{display:none!important}
+.section-title{font-size:17px;font-weight:700;margin:18px 0 8px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{border:1px solid #e4e8ec;border-radius:12px;padding:12px;margin-top:10px;background:#fafbfc}
+.item-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.remove{background:#fdecec;color:#c62828;padding:6px 9px;font-size:12px}
+.history{margin-top:14px}
+.history-card{border:1px solid #e4e8ec;border-radius:11px;padding:11px;margin-top:8px}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef1f4;font-size:12px}
+.small{font-size:12px;color:#777}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+@media(max-width:380px){.container{padding:10px}.card{padding:15px}.row{gap:7px}
+#otSection .row{gap:10px}
+#otSection .row input[type=time]{padding-left:6px;padding-right:6px}}
 </style>
 </head>
-
 <body>
-
-<div class="container">
-<div class="card">
+<div class="container"><div class="card">
 
 <h1>📍 เข้า-ออกงาน</h1>
-
-<div id="userInfo" class="user">
-  กำลังตรวจสอบ LINE...
-</div>
+<div id="userInfo" class="user">กำลังตรวจสอบ LINE...</div>
 
 <div class="actions" style="margin-bottom:14px">
-  <button id="attendanceTabBtn" class="primary">
-    Attendance
-  </button>
-
-  <button id="otTabBtn" class="secondary">
-    Request OT
-  </button>
+  <button id="attendanceTabBtn" class="primary">Attendance</button>
+  <button id="otTabBtn" class="secondary">Request OT</button>
 </div>
-
-
-<!-- ==============================
-     ATTENDANCE
-     ============================== -->
 
 <div id="attendanceSection">
-
-  <div class="item">
-
-    <div style="font-weight:700">
-      จุดทำงาน
-    </div>
-
-    <div id="workLocation" style="margin-top:5px">
-      กำลังโหลด...
-    </div>
-
-    <div class="small" id="workRule"></div>
-
-  </div>
-
-
-  <div class="item" style="text-align:center">
-
-    <div class="small">
-      สถานะ GPS
-    </div>
-
-    <div id="gpsStatus"
-         style="font-weight:700;margin-top:4px">
-      ยังไม่ได้ตรวจสอบ
-    </div>
-
-    <div class="small" id="distanceInfo"></div>
-
-  </div>
-
-
-  <div class="actions">
-
-    <button id="checkInBtn" class="primary">
-      CHECK IN
-    </button>
-
-    <button id="checkOutBtn" class="secondary">
-      CHECK OUT
-    </button>
-
-  </div>
-
-
-  <label for="photo">
-    รูปถ่าย
-  </label>
-
-  <input
-    type="file"
-    id="photo"
-    accept="image/*"
-    capture="environment"
-  >
-
-  <div class="small">
-    รูปใช้ประกอบรายการเข้า-ออกงาน ขนาดไม่เกิน 8 MB
-  </div>
-
-
-  <div class="section-title">
-    ประวัติการเข้างาน
-  </div>
-
-  <button
-    id="historyBtn"
-    class="secondary"
-    style="width:100%"
-  >
-    ดูประวัติ
-  </button>
-
-  <div id="history" class="history"></div>
-
+<div class="item">
+  <div style="font-weight:700">จุดทำงาน</div>
+  <div id="workLocation" style="margin-top:5px">กำลังโหลด...</div>
+  <div class="small" id="workRule"></div>
 </div>
-<!-- attendanceSection -->
 
+<div class="item" style="text-align:center">
+  <div class="small">สถานะ GPS</div>
+  <div id="gpsStatus" style="font-weight:700;margin-top:4px">ยังไม่ได้ตรวจสอบ</div>
+  <div class="small" id="distanceInfo"></div>
+</div>
 
-<!-- ==============================
-     REQUEST OT
-     ============================== -->
+<div class="actions">
+  <button id="checkInBtn" class="primary">CHECK IN</button>
+  <button id="checkOutBtn" class="secondary">CHECK OUT</button>
+</div>
+
+<label for="photo">รูปถ่าย</label>
+<input type="file" id="photo" accept="image/*" capture="environment">
+<div class="small">รูปใช้ประกอบรายการเข้า-ออกงาน ขนาดไม่เกิน 8 MB</div>
+
+<div class="section-title">ประวัติการเข้างาน</div>
+<button id="historyBtn" class="secondary" style="width:100%">ดูประวัติ</button>
+<div id="history" class="history"></div>
+</div><!-- attendanceSection -->
 
 <div id="otSection" class="hidden">
-
-  <div class="section-title">
-    Request OT
-  </div>
-
-
+  <div class="section-title">Request OT</div>
   <div class="item">
+    <div class="small">ขอ OT ได้เฉพาะวันที่มี Check In และ Check Out แล้ว และระบบจะตรวจสอบช่วงเวลา OT กับเวลาทำงานจริงจาก Attendance</div>
 
-    <div class="small">
-      ขอ OT ได้เฉพาะวันที่มี Check In และ Check Out แล้ว
-      และระบบจะตรวจสอบช่วงเวลา OT กับเวลาทำงานจริงจาก Attendance
-    </div>
-
-
-    <!-- วันที่ -->
-
-    <label for="otDate">
-      วันที่
-    </label>
-
-    <input
-      type="date"
-      id="otDate"
-    >
-
-
-    <!-- เวลาเริ่ม / เวลาสิ้นสุด -->
+    <label for="otDate">วันที่</label>
+    <input type="date" id="otDate">
 
     <div class="row">
-
       <div>
-
-        <label for="otStartTime">
-          เวลาเริ่ม
-        </label>
-
-        <input
-          type="time"
-          id="otStartTime"
-        >
-
+        <label for="otStartTime">เวลาเริ่ม</label>
+        <input type="time" id="otStartTime">
       </div>
-
-
       <div>
-
-        <label for="otEndTime">
-          เวลาสิ้นสุด
-        </label>
-
-        <input
-          type="time"
-          id="otEndTime"
-        >
-
+        <label for="otEndTime">เวลาสิ้นสุด</label>
+        <input type="time" id="otEndTime">
       </div>
-
     </div>
 
-
-    <!-- จำนวนชั่วโมง OT -->
-
-    <div
-      class="item"
-      style="margin-top:12px;text-align:center"
-    >
-
-      <div class="small">
-        จำนวนชั่วโมง OT
-      </div>
-
-      <div
-        id="otHours"
-        style="font-size:22px;font-weight:700;margin-top:4px"
-      >
-        0.00 ชั่วโมง
-      </div>
-
-      <div
-        id="otAttendanceHint"
-        class="small"
-        style="margin-top:4px"
-      ></div>
-
+    <div class="item" style="margin-top:12px;text-align:center">
+      <div class="small">จำนวนชั่วโมง OT</div>
+      <div id="otHours" style="font-size:22px;font-weight:700;margin-top:4px">0.00 ชั่วโมง</div>
+      <div id="otAttendanceHint" class="small" style="margin-top:4px"></div>
     </div>
 
+    <label for="otReason">เหตุผลการทำ OT</label>
+    <textarea id="otReason" placeholder="กรุณาระบุเหตุผลการทำ OT"></textarea>
 
-    <!-- เหตุผล -->
-
-    <label for="otReason">
-      เหตุผลการทำ OT
-    </label>
-
-    <textarea
-      id="otReason"
-      placeholder="กรุณาระบุเหตุผลการทำ OT"
-    ></textarea>
-
-
-    <!-- ส่ง OT -->
-
-    <button
-      id="submitOTBtn"
-      class="primary"
-      type="button"
-      style="width:100%;margin-top:12px"
-    >
-      ส่ง OT
-    </button>
-
+    <button id="submitOTBtn" class="primary" type="button" style="width:100%;margin-top:12px">ส่ง OT</button>
   </div>
 
-
-  <div class="section-title">
-    ประวัติ Request OT
-  </div>
-
-
-  <button
-    id="otHistoryBtn"
-    class="secondary"
-    style="width:100%"
-  >
-    ดูประวัติ OT
-  </button>
-
-
+  <div class="section-title">ประวัติ Request OT</div>
+  <button id="otHistoryBtn" class="secondary" style="width:100%">ดูประวัติ OT</button>
   <div id="otHistory" class="history"></div>
-
 </div>
-
 
 <div id="message" class="message"></div>
-
-</div>
-</div>
-
-
+</div></div>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
 <script>
-
-const LIFF_ID =
-  '2011333828-WZgotgUd';
-
-const WEB_APP_URL =
-  'https://script.google.com/macros/s/AKfycbysP0tyA-5YpcgUieO6IrMlcHbnqwektx-MaoeMhYYsgx2LJDJ3V2TvFfgEqrSsEBxkCg/exec';
-
+const LIFF_ID = '2011333828-WZgotgUd';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysP0tyA-5YpcgUieO6IrMlcHbnqwektx-MaoeMhYYsgx2LJDJ3V2TvFfgEqrSsEBxkCg/exec';
 let idToken = '';
 
-
 async function initLiff() {
-
   try {
-
-    await liff.init({
-      liffId:LIFF_ID
-    });
-
-    if (!liff.isLoggedIn()) {
-
-      liff.login();
-
-      return;
-    }
-
+    await liff.init({liffId:LIFF_ID});
+    if (!liff.isLoggedIn()) { liff.login(); return; }
     idToken = liff.getIDToken();
-
-    const profile =
-      await liff.getProfile();
-
-    const u =
-      document.getElementById('userInfo');
-
-    if (u) {
-
-      u.textContent =
-        profile.displayName
-        ? 'สวัสดี คุณ ' + profile.displayName
-        : 'กำลังใช้งาน HR mini';
-
-    }
-
+    const profile = await liff.getProfile();
+    const u = document.getElementById('userInfo');
+    if (u) u.textContent = profile.displayName ? 'สวัสดี คุณ ' + profile.displayName : 'กำลังใช้งาน HR mini';
     await pageInit();
-
   } catch(e) {
-
-    showMessage(
-      'message',
-      e.message || 'ไม่สามารถเริ่มต้น LIFF ได้',
-      false
-    );
-
+    showMessage('message', e.message || 'ไม่สามารถเริ่มต้น LIFF ได้', false);
   }
-
 }
-
-
 async function apiCall(payload){
-
-  const r =
-    await fetch(
-      WEB_APP_URL,
-      {
-        method:'POST',
-        headers:{
-          'Content-Type':
-            'text/plain;charset=utf-8'
-        },
-        body:JSON.stringify(payload)
-      }
-    );
-
-  if(!r.ok)
-
-    throw new Error(
-      'Apps Script API error: HTTP ' + r.status
-    );
-
+  const r = await fetch(WEB_APP_URL,{
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify(payload)
+  });
+  if(!r.ok) throw new Error('Apps Script API error: HTTP '+r.status);
   return r.json();
-
 }
-
-
 function showMessage(id,text,ok){
-
-  const el =
-    document.getElementById(id);
-
+  const el=document.getElementById(id);
   if(!el)return;
-
   el.style.display='block';
-
-  el.className =
-    'message ' + (ok?'success':'error');
-
+  el.className='message '+(ok?'success':'error');
   el.textContent=text;
-
 }
-
-
 function escapeHtml(s){
-
-  return String(s??'')
-    .replace(
-      /[&<>"']/g,
-      m => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      }[m])
-    );
-
+  return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
 
 let attendanceInfo=null;
 let otAttendance=null;
 
-
 function getLocation(){
-
-  return new Promise(
-    (resolve,reject)=>{
-
-      if(!navigator.geolocation){
-
-        reject(
-          new Error(
-            'อุปกรณ์นี้ไม่รองรับ GPS'
-          )
-        );
-
-        return;
-      }
-
-
-      navigator.geolocation.getCurrentPosition(
-
-        p => resolve(p),
-
-        e => reject(
-          new Error(
-            e.code===1
-            ? 'กรุณาอนุญาต Location/GPS ในมือถือ'
-            : e.message || 'อ่าน GPS ไม่สำเร็จ'
-          )
-        ),
-
-        {
-          enableHighAccuracy:true,
-          timeout:20000,
-          maximumAge:0
-        }
-
-      );
-
-    }
-  );
-
+  return new Promise((resolve,reject)=>{
+    if(!navigator.geolocation){reject(new Error('อุปกรณ์นี้ไม่รองรับ GPS'));return;}
+    navigator.geolocation.getCurrentPosition(
+      p=>resolve(p),
+      e=>reject(new Error(e.code===1?'กรุณาอนุญาต Location/GPS ในมือถือ':e.message||'อ่าน GPS ไม่สำเร็จ')),
+      {enableHighAccuracy:true,timeout:20000,maximumAge:0}
+    );
+  });
 }
-
-
 function fileToBase64(file){
-
-  return new Promise(
-    (resolve,reject)=>{
-
-      if(!file){
-
-        resolve(null);
-
-        return;
-      }
-
-
-      if(file.size > 8*1024*1024){
-
-        reject(
-          new Error(
-            'รูปถ่ายต้องไม่เกิน 8 MB'
-          )
-        );
-
-        return;
-      }
-
-
-      const r =
-        new FileReader();
-
-      r.onload =
-        () => resolve({
-          base64:r.result,
-          name:file.name,
-          mime:file.type || 'image/jpeg'
-        });
-
-      r.onerror =
-        () => reject(
-          new Error('อ่านรูปไม่สำเร็จ')
-        );
-
-      r.readAsDataURL(file);
-
-    }
-  );
-
+  return new Promise((resolve,reject)=>{
+    if(!file){resolve(null);return;}
+    if(file.size>8*1024*1024){reject(new Error('รูปถ่ายต้องไม่เกิน 8 MB'));return;}
+    const r=new FileReader(); r.onload=()=>resolve({base64:r.result,name:file.name,mime:file.type||'image/jpeg'}); r.onerror=()=>reject(new Error('อ่านรูปไม่สำเร็จ')); r.readAsDataURL(file);
+  });
 }
-
-
 async function loadInfo(){
-
-  const r =
-    await apiCall({
-      action:'getAttendanceInfo',
-      idToken
-    });
-
-  if(!r.success)
-
-    throw new Error(
-      r.message ||
-      'โหลดข้อมูลจุดทำงานไม่สำเร็จ'
-    );
-
-
+  const r=await apiCall({action:'getAttendanceInfo',idToken});
+  if(!r.success) throw new Error(r.message||'โหลดข้อมูลจุดทำงานไม่สำเร็จ');
   attendanceInfo=r;
-
-
-  document.getElementById(
-    'workLocation'
-  ).textContent =
-    r.location || 'ไม่ได้ระบุ';
-
-
-  document.getElementById(
-    'workRule'
-  ).textContent =
-    'อนุญาตภายใน ' +
-    r.radius +
-    ' เมตร · เวลางาน ' +
-    r.workStart +
-    ' - ' +
-    r.workEnd;
-
+  document.getElementById('workLocation').textContent=r.location||'ไม่ได้ระบุ';
+  document.getElementById('workRule').textContent='อนุญาตภายใน '+r.radius+' เมตร · เวลางาน '+r.workStart+' - '+r.workEnd;
 }
-
-
 async function doAttendance(mode){
-
-  const btn =
-    document.getElementById(
-      mode==='CHECK_IN'
-      ? 'checkInBtn'
-      : 'checkOutBtn'
-    );
-
-
-  btn.disabled=true;
-
-  btn.textContent =
-    'กำลังตรวจสอบ GPS...';
-
-
+  const btn=document.getElementById(mode==='CHECK_IN'?'checkInBtn':'checkOutBtn');
+  btn.disabled=true; btn.textContent='กำลังตรวจสอบ GPS...';
   try{
-
-    const p =
-      await getLocation();
-
-
-    document.getElementById(
-      'gpsStatus'
-    ).textContent =
-      'GPS พร้อมใช้งาน';
-
-
-    const distText =
-      attendanceInfo
-      ? 'จุดทำงาน: ' +
-        attendanceInfo.location
-      : '';
-
-
-    document.getElementById(
-      'distanceInfo'
-    ).textContent =
-      distText;
-
-
-    const f =
-      document.getElementById(
-        'photo'
-      ).files[0];
-
-
-    const pf =
-      await fileToBase64(f);
-
-
-    const r =
-      await apiCall({
-
-        action:'attendanceCheck',
-
-        idToken,
-
-        mode,
-
-        latitude:
-          p.coords.latitude,
-
-        longitude:
-          p.coords.longitude,
-
-        accuracy:
-          p.coords.accuracy,
-
-        location:
-          attendanceInfo?.location || '',
-
-        device:
-          navigator.userAgent,
-
-        photoBase64:
-          pf?.base64 || '',
-
-        photoName:
-          pf?.name || '',
-
-        photoMimeType:
-          pf?.mime || ''
-
-      });
-
-
-    if(!r.success){
-
-      document.getElementById(
-        'distanceInfo'
-      ).textContent =
-        'ระยะจากจุดทำงาน: ' +
-        (r.distance??'-') +
-        ' เมตร · กำหนด ' +
-        (r.radius ??
-          attendanceInfo?.radius ??
-          '-') +
-        ' เมตร';
-
-      throw new Error(
-        r.message ||
-        'ไม่สามารถทำรายการได้'
-      );
-
-    }
-
-
-    document.getElementById(
-      'distanceInfo'
-    ).textContent =
-      'ระยะจากจุดทำงาน: ' +
-      r.distance +
-      ' เมตร';
-
-
-    showMessage(
-      'message',
-      r.message +
-      (r.lateMinutes
-        ? '\nมาสาย ' +
-          r.lateMinutes +
-          ' นาที'
-        : '') +
-      (r.otMinutes
-        ? '\nOT ' +
-          r.otMinutes +
-          ' นาที'
-        : ''),
-      true
-    );
-
-
-    document.getElementById(
-      'photo'
-    ).value='';
-
-
-    loadHistory();
-
-
-  }catch(e){
-
-    showMessage(
-      'message',
-      e.message ||
-      'เกิดข้อผิดพลาด',
-      false
-    );
-
-  }finally{
-
-    btn.disabled=false;
-
-    btn.textContent =
-      mode==='CHECK_IN'
-      ? 'CHECK IN'
-      : 'CHECK OUT';
-
-  }
-
-}
-
-
-async function loadHistory(){
-
-  const box =
-    document.getElementById(
-      'history'
-    );
-
-
-  box.innerHTML =
-    '<div class="loading">กำลังโหลด...</div>';
-
-
-  const r =
-    await apiCall({
-      action:'getAttendanceHistory',
-      idToken
+    const p=await getLocation();
+    document.getElementById('gpsStatus').textContent='GPS พร้อมใช้งาน';
+    const distText=attendanceInfo?('จุดทำงาน: '+attendanceInfo.location):'';
+    document.getElementById('distanceInfo').textContent=distText;
+    const f=document.getElementById('photo').files[0];
+    const pf=await fileToBase64(f);
+    const r=await apiCall({
+      action:'attendanceCheck',idToken,mode,
+      latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy,
+      location:attendanceInfo?.location||'',device:navigator.userAgent,
+      photoBase64:pf?.base64||'',photoName:pf?.name||'',photoMimeType:pf?.mime||''
     });
+    if(!r.success){
+      document.getElementById('distanceInfo').textContent='ระยะจากจุดทำงาน: '+(r.distance??'-')+' เมตร · กำหนด '+(r.radius??attendanceInfo?.radius??'-')+' เมตร';
+      throw new Error(r.message||'ไม่สามารถทำรายการได้');
+    }
+    document.getElementById('distanceInfo').textContent='ระยะจากจุดทำงาน: '+r.distance+' เมตร';
+    showMessage('message',r.message+(r.lateMinutes?'\nมาสาย '+r.lateMinutes+' นาที':'')+(r.otMinutes?'\nOT '+r.otMinutes+' นาที':''),true);
+    document.getElementById('photo').value='';
+    loadHistory();
+  }catch(e){showMessage('message',e.message||'เกิดข้อผิดพลาด',false);}
+  finally{btn.disabled=false;btn.textContent=mode==='CHECK_IN'?'CHECK IN':'CHECK OUT';}
+}
+async function loadHistory(){
+  const box=document.getElementById('history'); box.innerHTML='<div class="loading">กำลังโหลด...</div>';
+  const r=await apiCall({action:'getAttendanceHistory',idToken});
+  if(!r.success){box.textContent=r.message||'โหลดไม่สำเร็จ';return;}
+  box.innerHTML=r.items.length?r.items.map(x=>`
+    <div class="history-card">
+      <div style="font-weight:700">${escapeHtml(x.date)}</div>
+      <div class="small">เข้า: ${escapeHtml(x.checkIn||'-')} · ออก: ${escapeHtml(x.checkOut||'-')}</div>
+      <div style="margin-top:5px"><span class="badge">${escapeHtml(x.status||'-')}</span></div>
+      <div class="small">สาย ${x.late||0} นาที · OT ${x.ot||0} นาที</div>
+      <div class="small">${escapeHtml(x.location||'')}</div>
+    </div>`).join(''):'ยังไม่มีประวัติ';
+}
 
+function setDefaultOTDate() {
+  const el = document.getElementById('otDate');
+  if (el && !el.value) el.value = new Date().toISOString().slice(0,10);
+}
 
-  if(!r.success){
-
-    box.textContent =
-      r.message ||
-      'โหลดไม่สำเร็จ';
-
+function calcOTHours() {
+  const s = document.getElementById('otStartTime').value;
+  const e = document.getElementById('otEndTime').value;
+  if (!s || !e) {
+    document.getElementById('otHours').textContent = '0.00 ชั่วโมง';
     return;
   }
-
-
-  box.innerHTML =
-    r.items.length
-
-    ? r.items.map(x => `
-
-      <div class="history-card">
-
-        <div style="font-weight:700">
-          ${escapeHtml(x.date)}
-        </div>
-
-        <div class="small">
-          เข้า: ${escapeHtml(x.checkIn||'-')}
-          ·
-          ออก: ${escapeHtml(x.checkOut||'-')}
-        </div>
-
-        <div style="margin-top:5px">
-          <span class="badge">
-            ${escapeHtml(x.status||'-')}
-          </span>
-        </div>
-
-        <div class="small">
-          สาย ${x.late||0} นาที
-          ·
-          OT ${x.ot||0} นาที
-        </div>
-
-        <div class="small">
-          ${escapeHtml(x.location||'')}
-        </div>
-
-      </div>
-
-    `).join('')
-
-    : 'ยังไม่มีประวัติ';
-
+  const [sh,sm] = s.split(':').map(Number);
+  const [eh,em] = e.split(':').map(Number);
+  let a = sh*60+sm, b = eh*60+em;
+  if (b < a) b += 1440;
+  document.getElementById('otHours').textContent = (Math.max(0,b-a)/60).toFixed(2) + ' ชั่วโมง';
 }
 
+function switchAttendanceTab(tab) {
+  const att = document.getElementById('attendanceSection');
+  const ot = document.getElementById('otSection');
+  const ab = document.getElementById('attendanceTabBtn');
+  const ob = document.getElementById('otTabBtn');
 
-function setDefaultOTDate(){
-
-  const el =
-    document.getElementById(
-      'otDate'
-    );
-
-  if(el && !el.value)
-
-    el.value =
-      new Date()
-      .toISOString()
-      .slice(0,10);
-
-}
-
-
-function calcOTHours(){
-
-  const s =
-    document.getElementById(
-      'otStartTime'
-    ).value;
-
-
-  const e =
-    document.getElementById(
-      'otEndTime'
-    ).value;
-
-
-  if(!s || !e){
-
-    document.getElementById(
-      'otHours'
-    ).textContent =
-      '0.00 ชั่วโมง';
-
-    return;
-  }
-
-
-  const [sh,sm] =
-    s.split(':').map(Number);
-
-  const [eh,em] =
-    e.split(':').map(Number);
-
-
-  let a =
-    sh*60+sm;
-
-  let b =
-    eh*60+em;
-
-
-  if(b<a)
-
-    b+=1440;
-
-
-  document.getElementById(
-    'otHours'
-  ).textContent =
-    (
-      Math.max(0,b-a)/60
-    ).toFixed(2) +
-    ' ชั่วโมง';
-
-}
-
-
-function switchAttendanceTab(tab){
-
-  const att =
-    document.getElementById(
-      'attendanceSection'
-    );
-
-  const ot =
-    document.getElementById(
-      'otSection'
-    );
-
-  const ab =
-    document.getElementById(
-      'attendanceTabBtn'
-    );
-
-  const ob =
-    document.getElementById(
-      'otTabBtn'
-    );
-
-
-  if(tab==='ot'){
-
+  if (tab === 'ot') {
     att.classList.add('hidden');
-
     ot.classList.remove('hidden');
-
-    ab.className='secondary';
-
-    ob.className='primary';
-
+    ab.className = 'secondary';
+    ob.className = 'primary';
     setDefaultOTDate();
-
     loadOTAttendanceForDate();
-
     loadOTHistory();
-
-  }else{
-
+  } else {
     ot.classList.add('hidden');
-
     att.classList.remove('hidden');
-
-    ab.className='primary';
-
-    ob.className='secondary';
-
+    ab.className = 'primary';
+    ob.className = 'secondary';
   }
-
 }
 
+async function loadOTAttendanceForDate() {
+  const date = document.getElementById('otDate').value;
+  const hint = document.getElementById('otAttendanceHint');
+  const btn = document.getElementById('submitOTBtn');
 
-async function loadOTAttendanceForDate(){
-
-  const date =
-    document.getElementById(
-      'otDate'
-    ).value;
-
-
-  const hint =
-    document.getElementById(
-      'otAttendanceHint'
-    );
-
-
-  const btn =
-    document.getElementById(
-      'submitOTBtn'
-    );
-
-
-  if(!date){
-
-    hint.textContent='';
-
-    btn.disabled=true;
-
+  if (!date) {
+    hint.textContent = '';
+    btn.disabled = true;
     return;
   }
 
+  hint.textContent = 'กำลังตรวจสอบ Attendance...';
+  btn.disabled = true;
 
-  hint.textContent =
-    'กำลังตรวจสอบ Attendance...';
+  try {
+    const r = await apiCall({action:'getAttendanceForOT',idToken,otDate:date});
+    if (!r.success) throw new Error(r.message || 'ตรวจสอบ Attendance ไม่สำเร็จ');
 
-
-  btn.disabled=true;
-
-
-  try{
-
-    const r =
-      await apiCall({
-
-        action:
-          'getAttendanceForOT',
-
-        idToken,
-
-        otDate:
-          date
-
-      });
-
-
-    if(!r.success)
-
-      throw new Error(
-        r.message ||
-        'ตรวจสอบ Attendance ไม่สำเร็จ'
-      );
-
-
-    otAttendance =
-      r.attendance || null;
-
-
-    if(
-      !otAttendance ||
-      !otAttendance.checkIn ||
-      !otAttendance.checkOut
-    ){
-
-      hint.textContent =
-        'ไม่สามารถขอ OT ได้: ' +
-        'วันที่เลือกยังไม่มี Check In และ Check Out ครบถ้วน';
-
+    otAttendance = r.attendance || null;
+    if (!otAttendance || !otAttendance.checkIn || !otAttendance.checkOut) {
+      hint.textContent = 'ไม่สามารถขอ OT ได้: วันที่เลือกยังไม่มี Check In และ Check Out ครบถ้วน';
       return;
     }
 
-
     hint.textContent =
-      'ทำงานจริง ' +
-      otAttendance.checkIn +
-      ' - ' +
-      otAttendance.checkOut +
-      ' · OT ใน Attendance ' +
-      Number(
-        otAttendance.otMinutes || 0
-      ) +
-      ' นาที';
-
-
-    btn.disabled=false;
-
-
-  }catch(e){
-
-    otAttendance=null;
-
-    hint.textContent =
-      e.message ||
-      'ตรวจสอบ Attendance ไม่สำเร็จ';
-
+      'ทำงานจริง ' + otAttendance.checkIn + ' - ' + otAttendance.checkOut +
+      ' · OT ใน Attendance ' + Number(otAttendance.otMinutes || 0) + ' นาที';
+    btn.disabled = false;
+  } catch (e) {
+    otAttendance = null;
+    hint.textContent = e.message || 'ตรวจสอบ Attendance ไม่สำเร็จ';
   }
-
 }
 
+async function submitOT() {
+  const btn = document.getElementById('submitOTBtn');
+  const date = document.getElementById('otDate').value;
+  const start = document.getElementById('otStartTime').value;
+  const end = document.getElementById('otEndTime').value;
+  const reason = document.getElementById('otReason').value.trim();
 
-async function submitOT(){
-
-  const btn =
-    document.getElementById(
-      'submitOTBtn'
-    );
-
-
-  const date =
-    document.getElementById(
-      'otDate'
-    ).value;
-
-
-  const start =
-    document.getElementById(
-      'otStartTime'
-    ).value;
-
-
-  const end =
-    document.getElementById(
-      'otEndTime'
-    ).value;
-
-
-  const reason =
-    document.getElementById(
-      'otReason'
-    ).value.trim();
-
-
-  if(
-    !date ||
-    !start ||
-    !end ||
-    !reason
-  ){
-
-    showMessage(
-      'message',
-      'กรุณากรอกวันที่ เวลาเริ่ม เวลาสิ้นสุด และเหตุผลให้ครบถ้วน',
-      false
-    );
-
+  if (!date || !start || !end || !reason) {
+    showMessage('message','กรุณากรอกวันที่ เวลาเริ่ม เวลาสิ้นสุด และเหตุผลให้ครบถ้วน',false);
     return;
   }
-
 
   calcOTHours();
+  btn.disabled = true;
+  btn.textContent = 'กำลังส่ง OT...';
 
+  try {
+    const r = await apiCall({
+      action:'submitOT',
+      idToken,
+      otDate:date,
+      otStartTime:start,
+      otEndTime:end,
+      reason
+    });
 
-  btn.disabled=true;
-
-  btn.textContent =
-    'กำลังส่ง OT...';
-
-
-  try{
-
-    const r =
-      await apiCall({
-
-        action:'submitOT',
-
-        idToken,
-
-        otDate:date,
-
-        otStartTime:start,
-
-        otEndTime:end,
-
-        reason
-
-      });
-
-
-    if(!r.success)
-
-      throw new Error(
-        r.message ||
-        'ส่งคำขอ OT ไม่สำเร็จ'
-      );
-
+    if (!r.success) throw new Error(r.message || 'ส่งคำขอ OT ไม่สำเร็จ');
 
     showMessage(
-
       'message',
-
-      'ส่งคำขอ OT เรียบร้อยแล้ว\n' +
-      'เลขที่: ' +
-      r.otId +
-      '\nจำนวน: ' +
-      Number(
-        r.otHours || 0
-      ).toFixed(2) +
-      ' ชั่วโมง',
-
+      'ส่งคำขอ OT เรียบร้อยแล้ว\nเลขที่: ' + r.otId +
+      '\nจำนวน: ' + Number(r.otHours || 0).toFixed(2) + ' ชั่วโมง',
       true
-
     );
 
-
-    document.getElementById(
-      'otReason'
-    ).value='';
-
-
-    document.getElementById(
-      'otStartTime'
-    ).value='';
-
-
-    document.getElementById(
-      'otEndTime'
-    ).value='';
-
-
+    document.getElementById('otReason').value = '';
+    document.getElementById('otStartTime').value = '';
+    document.getElementById('otEndTime').value = '';
     calcOTHours();
-
-
     loadOTAttendanceForDate();
-
     loadOTHistory();
-
-
-  }catch(e){
-
-    showMessage(
-      'message',
-      e.message ||
-      'เกิดข้อผิดพลาด',
-      false
-    );
-
-  }finally{
-
-    btn.textContent='ส่ง OT';
-
-    if(otAttendance)
-
-      btn.disabled=false;
-
+  } catch (e) {
+    showMessage('message',e.message || 'เกิดข้อผิดพลาด',false);
+  } finally {
+    btn.textContent = 'ส่ง OT';
+    if (otAttendance) btn.disabled = false;
   }
-
 }
 
+async function loadOTHistory() {
+  const box = document.getElementById('otHistory');
+  box.innerHTML = '<div class="loading">กำลังโหลด...</div>';
 
-async function loadOTHistory(){
-
-  const box =
-    document.getElementById(
-      'otHistory'
-    );
-
-
-  box.innerHTML =
-    '<div class="loading">กำลังโหลด...</div>';
-
-
-  try{
-
-    const r =
-      await apiCall({
-
-        action:'getOTHistory',
-
-        idToken
-
-      });
-
-
-    if(!r.success){
-
-      box.textContent =
-        r.message ||
-        'โหลดไม่สำเร็จ';
-
+  try {
+    const r = await apiCall({action:'getOTHistory',idToken});
+    if (!r.success) {
+      box.textContent = r.message || 'โหลดไม่สำเร็จ';
       return;
     }
 
-
-    box.innerHTML =
-      r.items.length
-
-      ? r.items.map(x => `
-
-        <div class="history-card">
-
-          <div style="font-weight:700">
-            ${escapeHtml(x.otId)}
-          </div>
-
-          <div class="small">
-            ${escapeHtml(x.date)}
-            ·
-            ${escapeHtml(x.startTime)}
-            -
-            ${escapeHtml(x.endTime)}
-          </div>
-
-          <div class="small">
-            OT
-            ${Number(
-              x.otHours || 0
-            ).toFixed(2)}
-            ชั่วโมง
-            (
-            ${Number(
-              x.otMinutes || 0
-            )}
-            นาที)
-          </div>
-
-          <div style="margin-top:5px">
-            ${escapeHtml(
-              x.reason || ''
-            )}
-          </div>
-
-          <div style="margin-top:6px">
-            <span class="badge">
-              ${escapeHtml(
-                x.status || '-'
-              )}
-            </span>
-          </div>
-
-        </div>
-
-      `).join('')
-
-      : 'ยังไม่มีประวัติ Request OT';
-
-
-  }catch(e){
-
-    box.textContent =
-      e.message ||
-      'โหลดไม่สำเร็จ';
-
+    box.innerHTML = r.items.length ? r.items.map(x => `
+      <div class="history-card">
+        <div style="font-weight:700">${escapeHtml(x.otId)}</div>
+        <div class="small">${escapeHtml(x.date)} · ${escapeHtml(x.startTime)} - ${escapeHtml(x.endTime)}</div>
+        <div class="small">OT ${Number(x.otHours || 0).toFixed(2)} ชั่วโมง (${Number(x.otMinutes || 0)} นาที)</div>
+        <div style="margin-top:5px">${escapeHtml(x.reason || '')}</div>
+        <div style="margin-top:6px"><span class="badge">${escapeHtml(x.status || '-')}</span></div>
+      </div>
+    `).join('') : 'ยังไม่มีประวัติ Request OT';
+  } catch (e) {
+    box.textContent = e.message || 'โหลดไม่สำเร็จ';
   }
-
 }
-
 
 async function pageInit(){
-
   await loadInfo();
+  document.getElementById('checkInBtn').onclick=()=>doAttendance('CHECK_IN');
+  document.getElementById('checkOutBtn').onclick=()=>doAttendance('CHECK_OUT');
+  document.getElementById('historyBtn').onclick=loadHistory;
 
-
-  document.getElementById(
-    'checkInBtn'
-  ).onclick =
-    () => doAttendance(
-      'CHECK_IN'
-    );
-
-
-  document.getElementById(
-    'checkOutBtn'
-  ).onclick =
-    () => doAttendance(
-      'CHECK_OUT'
-    );
-
-
-  document.getElementById(
-    'historyBtn'
-  ).onclick =
-    loadHistory;
-
-
-  document.getElementById(
-    'attendanceTabBtn'
-  ).onclick =
-    () => switchAttendanceTab(
-      'attendance'
-    );
-
-
-  document.getElementById(
-    'otTabBtn'
-  ).onclick =
-    () => switchAttendanceTab(
-      'ot'
-    );
-
-
-  document.getElementById(
-    'otDate'
-  ).addEventListener(
-    'change',
-    loadOTAttendanceForDate
-  );
-
-
-  document.getElementById(
-    'otStartTime'
-  ).addEventListener(
-    'input',
-    calcOTHours
-  );
-
-
-  document.getElementById(
-    'otEndTime'
-  ).addEventListener(
-    'input',
-    calcOTHours
-  );
-
-
-  document.getElementById(
-    'submitOTBtn'
-  ).onclick =
-    submitOT;
-
-
-  document.getElementById(
-    'otHistoryBtn'
-  ).onclick =
-    loadOTHistory;
-
+  document.getElementById('attendanceTabBtn').onclick=()=>switchAttendanceTab('attendance');
+  document.getElementById('otTabBtn').onclick=()=>switchAttendanceTab('ot');
+  document.getElementById('otDate').addEventListener('change',loadOTAttendanceForDate);
+  document.getElementById('otStartTime').addEventListener('input',calcOTHours);
+  document.getElementById('otEndTime').addEventListener('input',calcOTHours);
+  document.getElementById('submitOTBtn').onclick=submitOT;
+  document.getElementById('otHistoryBtn').onclick=loadOTHistory;
 
   setDefaultOTDate();
-
-
-  document.getElementById(
-    'submitOTBtn'
-  ).disabled=true;
-
+  document.getElementById('submitOTBtn').disabled=true;
 }
 
-
-window.addEventListener(
-  'load',
-  initLiff
-);
-
+window.addEventListener('load',initLiff);
 </script>
-
 </body>
 </html>
