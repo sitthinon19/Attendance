@@ -14,12 +14,12 @@ h1{font-size:22px;margin:0 0 8px;text-align:center}
 label{display:block;font-weight:600;margin:12px 0 6px}
 input,select,textarea,button{font:inherit}
 input,select,textarea{width:100%;max-width:100%;min-width:0;padding:11px 12px;border:1px solid #d9dee3;border-radius:10px;background:#fff;box-sizing:border-box}
-input[type=date],input[type=time]{display:block;box-sizing:border-box}
-#otSection #otDate{width:220px!important;max-width:220px!important;min-width:0;padding:9px 8px}
-#otSection .row{display:grid;grid-template-columns:140px 140px;gap:28px;width:100%;max-width:100%;align-items:start}
-#otSection .row>div{width:140px;min-width:0}
-#otSection .row input[type=time]{width:140px!important;max-width:140px!important;min-width:0;padding:9px 7px}
+input[type=date],input[type=time]{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:9px 8px}
+#otSection .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;width:100%;max-width:100%;margin-top:2px}
+#otSection .row>div{min-width:0;width:100%}
+#otSection .row input[type=time]{width:100%;max-width:100%;min-width:0}
 #otSection .item{overflow:hidden}
+#otSection input,#otSection textarea{max-width:100%;min-width:0;box-sizing:border-box}
 textarea{min-height:90px;resize:vertical}
 button{border:0;border-radius:11px;padding:12px 14px;cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
@@ -42,10 +42,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .small{font-size:12px;color:#777}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 @media(max-width:380px){.container{padding:10px}.card{padding:15px}.row{gap:7px}
-#otSection #otDate{width:180px!important;max-width:180px!important}
-#otSection .row{grid-template-columns:120px 120px;gap:14px}
-#otSection .row>div{width:120px}
-#otSection .row input[type=time]{width:120px!important;max-width:120px!important;padding-left:5px;padding-right:5px}}
+#otSection .row{gap:10px}
+#otSection .row input[type=time]{padding-left:6px;padding-right:6px}}
 </style>
 </head>
 <body>
@@ -84,7 +82,6 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="section-title">ประวัติการเข้างาน</div>
 <button id="historyBtn" class="secondary" style="width:100%">ดูประวัติ</button>
 <div id="history" class="history"></div>
-
 </div><!-- attendanceSection -->
 
 <div id="otSection" class="hidden">
@@ -127,7 +124,6 @@ button:disabled{opacity:.55;cursor:not-allowed}
 </div></div>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-
 const LIFF_ID = '2011333828-WZgotgUd';
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbysP0tyA-5YpcgUieO6IrMlcHbnqwektx-MaoeMhYYsgx2LJDJ3V2TvFfgEqrSsEBxkCg/exec';
 let idToken = '';
@@ -214,7 +210,7 @@ async function doAttendance(mode){
       throw new Error(r.message||'ไม่สามารถทำรายการได้');
     }
     document.getElementById('distanceInfo').textContent='ระยะจากจุดทำงาน: '+r.distance+' เมตร';
-    showMessage('message',r.message+(r.lateMinutes?'\\nมาสาย '+r.lateMinutes+' นาที':'')+(r.otMinutes?'\\nOT '+r.otMinutes+' นาที':''),true);
+    showMessage('message',r.message+(r.lateMinutes?'\nมาสาย '+r.lateMinutes+' นาที':'')+(r.otMinutes?'\nOT '+r.otMinutes+' นาที':''),true);
     document.getElementById('photo').value='';
     loadHistory();
   }catch(e){showMessage('message',e.message||'เกิดข้อผิดพลาด',false);}
