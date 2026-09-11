@@ -25,7 +25,8 @@ textarea{min-height:90px;resize:vertical}
 button{border:0;border-radius:11px;padding:12px 14px;cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
 .primary{width:100%;background:#06c755;color:#fff;font-weight:700}
-.secondary{background:#06c755;color:#fff;font-weight:700}
+.secondary{background:#fff;color:#06c755;font-weight:700;border:1px solid #06c755}
+.secondary.active{background:#06c755;color:#fff;border-color:#06c755}
 .danger{background:#c62828;color:#fff}
 .message{display:none;margin-top:14px;padding:12px;border-radius:10px;white-space:pre-line;text-align:center}
 .success{background:#e8f7ed;color:#137333}
@@ -383,8 +384,23 @@ async function loadOTHistory() {
 
 async function pageInit(){
   await loadInfo();
-  document.getElementById('checkInBtn').onclick=()=>doAttendance('CHECK_IN');
-  document.getElementById('checkOutBtn').onclick=()=>doAttendance('CHECK_OUT');
+  const checkInBtn = document.getElementById('checkInBtn');
+  const checkOutBtn = document.getElementById('checkOutBtn');
+
+  checkInBtn.className = 'primary';
+  checkOutBtn.className = 'secondary';
+
+  checkInBtn.onclick = () => {
+    checkInBtn.className = 'primary';
+    checkOutBtn.className = 'secondary';
+    doAttendance('CHECK_IN');
+  };
+
+  checkOutBtn.onclick = () => {
+    checkOutBtn.className = 'primary';
+    checkInBtn.className = 'secondary';
+    doAttendance('CHECK_OUT');
+  };
   document.getElementById('historyBtn').onclick=loadHistory;
 
   document.getElementById('attendanceTabBtn').onclick=()=>switchAttendanceTab('attendance');
