@@ -43,6 +43,9 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef1f4;font-size:12px}
 .small{font-size:12px;color:#777}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.ot-special-option{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:12px;border:1px solid #d9dee3;border-radius:12px;background:#f7fbf8;cursor:pointer;font-weight:700}
+.ot-special-option input[type=checkbox]{width:20px;height:20px;flex:0 0 20px;margin:0;accent-color:#06c755}
+.ot-special-option span{line-height:1.35}
 @media(max-width:380px){.container{padding:10px}.card{padding:15px}.row{gap:7px}
 #otSection .row{grid-template-columns:40% 40%;justify-content:start;gap:8px}
 #otSection .row input[type=time]{padding-left:6px;padding-right:6px}
@@ -95,6 +98,12 @@ button:disabled{opacity:.55;cursor:not-allowed}
     <label for="otDate">วันที่</label>
     <input type="date" id="otDate">
 
+    <label style="display:flex;align-items:center;gap:9px;margin:14px 0 8px;cursor:pointer;font-weight:700">
+      <input type="checkbox" id="otSpecial" style="width:20px;height:20px;flex:0 0 auto;margin:0">
+      <span>เบิก OT กรณีพิเศษ / วันหยุด</span>
+    </label>
+    <div class="small" style="margin:-2px 0 10px 29px">สำหรับวันที่พนักงานเข้าทำงานในวันหยุดหรือวันพิเศษ แม้ทำงานจริงไม่ครบ 8 ชั่วโมง แต่ต้องมี Check In และ Check Out จริง และเวลาที่ขอต้องอยู่ภายในเวลาทำงานจริง</div>
+
     <div class="row">
       <div>
         <label for="otStartTime">เวลาเริ่ม</label>
@@ -128,7 +137,7 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
 const LIFF_ID = '2011333828-WZgotgUd';
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyQGOtNENuiKuEysP-Khss1ystQw1xxwluY5NhLofP7gw1JqfcAM5WIdxh0xzCXKd6jlw/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxnvpu7QpQEVbI2seWPkm7t995EmrSOnxOLbRe91z46S0LdMju7aFpX3jsglj7Lh18EEQ/exec';
 let idToken = '';
 
 async function initLiff() {
@@ -278,6 +287,7 @@ async function loadOTAttendanceForDate() {
   const date = document.getElementById('otDate').value;
   const hint = document.getElementById('otAttendanceHint');
   const btn = document.getElementById('submitOTBtn');
+  const special = document.getElementById('otSpecial').checked;
 
   if (!date) {
     hint.textContent = '';
@@ -299,8 +309,10 @@ async function loadOTAttendanceForDate() {
     }
 
     hint.textContent =
+      (special ? 'OT กรณีพิเศษ: ' : '') +
       'ทำงานจริง ' + otAttendance.checkIn + ' - ' + otAttendance.checkOut +
-      ' · OT ใน Attendance ' + Number(otAttendance.otMinutes || 0) + ' นาที';
+      ' · OT ใน Attendance ' + Number(otAttendance.otMinutes || 0) + ' นาที' +
+      (special ? ' · สามารถขอ OT ภายในช่วงที่ทำงานจริงได้ แม้ไม่ครบ 8 ชั่วโมง' : '');
     btn.disabled = false;
   } catch (e) {
     otAttendance = null;
@@ -331,7 +343,8 @@ async function submitOT() {
       otDate:date,
       otStartTime:start,
       otEndTime:end,
-      reason
+      reason,
+      otSpecial:document.getElementById('otSpecial').checked
     });
 
     if (!r.success) throw new Error(r.message || 'ส่งคำขอ OT ไม่สำเร็จ');
@@ -373,6 +386,7 @@ async function loadOTHistory() {
         <div style="font-weight:700">${escapeHtml(x.otId)}</div>
         <div class="small">${escapeHtml(x.date)} · ${escapeHtml(x.startTime)} - ${escapeHtml(x.endTime)}</div>
         <div class="small">OT ${Number(x.otHours || 0).toFixed(2)} ชั่วโมง (${Number(x.otMinutes || 0)} นาที)</div>
+        <div style="margin-top:5px"><span class="badge">${String(x.otType||'NORMAL').toUpperCase()==='SPECIAL'?'OT กรณีพิเศษ / วันหยุด':'OT ปกติ'}</span></div>
         <div style="margin-top:5px">${escapeHtml(x.reason || '')}</div>
         <div style="margin-top:6px"><span class="badge">${escapeHtml(x.status || '-')}</span></div>
       </div>
@@ -406,6 +420,7 @@ async function pageInit(){
   document.getElementById('attendanceTabBtn').onclick=()=>switchAttendanceTab('attendance');
   document.getElementById('otTabBtn').onclick=()=>switchAttendanceTab('ot');
   document.getElementById('otDate').addEventListener('change',loadOTAttendanceForDate);
+  document.getElementById('otSpecial').addEventListener('change',loadOTAttendanceForDate);
   document.getElementById('otStartTime').addEventListener('input',calcOTHours);
   document.getElementById('otEndTime').addEventListener('input',calcOTHours);
   document.getElementById('submitOTBtn').onclick=submitOT;
